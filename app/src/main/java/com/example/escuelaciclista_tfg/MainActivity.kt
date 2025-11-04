@@ -1,156 +1,129 @@
 package com.example.escuelaciclista_tfg
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.escuelaciclista_tfg.R
 
 class MainActivity : AppCompatActivity() {
-
-    // Declaramos variables para los campos del formulario
-    private lateinit var etNombreApellidos: EditText
-    private lateinit var etFechaNacimiento: EditText
-    private lateinit var etDNI: EditText
-    private lateinit var etDireccion: EditText
-    private lateinit var etTelefono: EditText
-
-    private lateinit var etNombreTutor: EditText
-    private lateinit var etDNITutor: EditText
-    private lateinit var etTelefonoTutor: EditText
-    private lateinit var etEmailTutor: EditText
-
-    private lateinit var etAlergias: EditText
-    private lateinit var etCondicionMedica: EditText
-    private lateinit var etMedicamentos: EditText
-    private lateinit var etTelefonoEmergencias: EditText
-
-    private lateinit var spTipoBicicleta: Spinner
-    private lateinit var spTalla: Spinner
-    private lateinit var spModalidad: Spinner
-
-    private lateinit var cbProteccionDatos: CheckBox
-    private lateinit var cbFotosRedes: CheckBox
-    private lateinit var cbAsistenciaMedica: CheckBox
-    private lateinit var cbNormasEscuela: CheckBox
-
-    private lateinit var btnGuardar: Button
-    private lateinit var btnBorrar: Button
-    private lateinit var btnVerLista: Button
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        // Mantener tu configuración original de insets
+        // Mantener compatibilidad con tu estructura base
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // Inicialización de campos
-        etNombreApellidos = findViewById(R.id.etNombreApellidos)
-        etFechaNacimiento = findViewById(R.id.etFechaNacimiento)
-        etDNI = findViewById(R.id.etDNI)
-        etDireccion = findViewById(R.id.etDireccion)
-        etTelefono = findViewById(R.id.etTelefono)
+        // -------------------------
+        // Referencias a los elementos del XML
+        // -------------------------
+        val etNombreApellidos = findViewById<EditText>(R.id.etNombreApellidos)
+        val etFechaNacimiento = findViewById<EditText>(R.id.etFechaNacimiento)
+        val etDNI = findViewById<EditText>(R.id.etDNI)
+        val etDireccion = findViewById<EditText>(R.id.etDireccion)
+        val etTelefono = findViewById<EditText>(R.id.etTelefono)
 
-        etNombreTutor = findViewById(R.id.etNombreTutor)
-        etDNITutor = findViewById(R.id.etDNITutor)
-        etTelefonoTutor = findViewById(R.id.etTelefonoTutor)
-        etEmailTutor = findViewById(R.id.etEmailTutor)
+        val etNombreTutor = findViewById<EditText>(R.id.etNombreTutor)
+        val etDNITutor = findViewById<EditText>(R.id.etDNITutor)
+        val etTelefonoTutor = findViewById<EditText>(R.id.etTelefonoTutor)
+        val etEmailTutor = findViewById<EditText>(R.id.etEmailTutor)
 
-        etAlergias = findViewById(R.id.etAlergias)
-        etCondicionMedica = findViewById(R.id.etCondicionMedica)
-        etMedicamentos = findViewById(R.id.etMedicamentos)
-        etTelefonoEmergencias = findViewById(R.id.etTelefonoEmergencias)
+        val etAlergias = findViewById<EditText>(R.id.etAlergias)
+        val etCondicionMedica = findViewById<EditText>(R.id.etCondicionMedica)
+        val etMedicamentos = findViewById<EditText>(R.id.etMedicamentos)
+        val etTelefonoEmergencias = findViewById<EditText>(R.id.etTelefonoEmergencias)
 
-        spTipoBicicleta = findViewById(R.id.spTipoBicicleta)
-        spTalla = findViewById(R.id.spTalla)
-        spModalidad = findViewById(R.id.spModalidad)
+        val spTipoBicicleta = findViewById<Spinner>(R.id.spTipoBicicleta)
+        val spTalla = findViewById<Spinner>(R.id.spTalla)
+        val spModalidad = findViewById<Spinner>(R.id.spModalidad)
 
-        cbProteccionDatos = findViewById(R.id.cbProteccionDatos)
-        cbFotosRedes = findViewById(R.id.cbFotosRedes)
-        cbAsistenciaMedica = findViewById(R.id.cbAsistenciaMedica)
-        cbNormasEscuela = findViewById(R.id.cbNormasEscuela)
+        val cbProteccionDatos = findViewById<CheckBox>(R.id.cbProteccionDatos)
+        val cbFotosRedes = findViewById<CheckBox>(R.id.cbFotosRedes)
+        val cbAsistenciaMedica = findViewById<CheckBox>(R.id.cbAsistenciaMedica)
+        val cbNormasEscuela = findViewById<CheckBox>(R.id.cbNormasEscuela)
 
-        btnGuardar = findViewById(R.id.btnGuardar)
-        btnBorrar = findViewById(R.id.btnBorrar)
-        btnVerLista = findViewById(R.id.btnVerLista)
+        val btnGuardar = findViewById<Button>(R.id.btnGuardar)
+        val btnBorrar = findViewById<Button>(R.id.btnBorrar)
 
-        // Llenamos los Spinners
-        setupSpinners()
-
-        // Eventos de botones
-        btnGuardar.setOnClickListener { guardarDatos() }
-        btnBorrar.setOnClickListener { limpiarCampos() }
-        btnVerLista.setOnClickListener {
-            Toast.makeText(this, "Abrir lista de alumnos (a implementar)", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun setupSpinners() {
-        val tiposBici = arrayOf("Bici de carretera", "Bici de montaña", "Ambas")
-        val tallas = arrayOf("XS", "S", "M", "L")
-        val modalidades = arrayOf("Carretera", "Montaña", "Ambas")
+        // -------------------------
+        // Llenar los spinners (si no lo haces desde strings.xml)
+        // -------------------------
+        val opcionesTipo = arrayOf("Bici de carretera", "Bici de montaña", "Ambas")
+        val opcionesTalla = arrayOf("XS", "S", "M", "L")
+        val opcionesModalidad = arrayOf("Carretera", "Montaña", "Ambas")
 
         spTipoBicicleta.adapter =
-            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, tiposBici)
+            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, opcionesTipo)
         spTalla.adapter =
-            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, tallas)
+            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, opcionesTalla)
         spModalidad.adapter =
-            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, modalidades)
+            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, opcionesModalidad)
+
+        // -------------------------
+        // BOTÓN BORRAR
+        // -------------------------
+        btnBorrar.setOnClickListener {
+            val editTexts = listOf(
+                etNombreApellidos, etFechaNacimiento, etDNI, etDireccion, etTelefono,
+                etNombreTutor, etDNITutor, etTelefonoTutor, etEmailTutor,
+                etAlergias, etCondicionMedica, etMedicamentos, etTelefonoEmergencias
+            )
+            editTexts.forEach { it.text.clear() }
+
+            cbProteccionDatos.isChecked = false
+            cbFotosRedes.isChecked = false
+            cbAsistenciaMedica.isChecked = false
+            cbNormasEscuela.isChecked = false
+
+            spTipoBicicleta.setSelection(0)
+            spTalla.setSelection(0)
+            spModalidad.setSelection(0)
+
+            Toast.makeText(this, "Formulario borrado correctamente", Toast.LENGTH_SHORT).show()
+        }
+
+        // -------------------------
+        // BOTÓN GUARDAR
+        // -------------------------
+        btnGuardar.setOnClickListener {
+            // Validaciones de los campos
+            val dniRegex = Regex("^[0-9]{8}[A-Za-z]\$")
+            val emailRegex = Regex("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")
+
+            when {
+                etNombreApellidos.text.isBlank() -> showToast("Introduce el nombre y apellidos del alumno")
+                etFechaNacimiento.text.isBlank() -> showToast("Introduce la fecha de nacimiento")
+                etDNI.text.isBlank() -> showToast("Introduce el DNI del alumno")
+                !dniRegex.matches(etDNI.text.toString()) -> showToast("El formato del DNI no es válido")
+                etDireccion.text.isBlank() -> showToast("Introduce la dirección del alumno")
+                etNombreTutor.text.isBlank() -> showToast("Introduce el nombre del tutor")
+                etDNITutor.text.isBlank() -> showToast("Introduce el DNI del tutor")
+                !dniRegex.matches(etDNITutor.text.toString()) -> showToast("El formato del DNI del tutor no es válido")
+                etTelefonoTutor.text.isBlank() -> showToast("Introduce el teléfono del tutor")
+                etEmailTutor.text.isBlank() -> showToast("Introduce el correo electrónico del tutor")
+                !emailRegex.matches(etEmailTutor.text.toString()) -> showToast("El correo electrónico no es válido")
+                !cbProteccionDatos.isChecked || !cbFotosRedes.isChecked ||
+                        !cbAsistenciaMedica.isChecked || !cbNormasEscuela.isChecked ->
+                    showToast("Debes aceptar todos los permisos antes de continuar")
+
+                else -> {
+                    Toast.makeText(this, "Datos guardados correctamente", Toast.LENGTH_SHORT).show()
+                    // Navegar a la segunda pantalla (MainActivity2)
+                    val intent = Intent(this, MainActivity2::class.java)
+                    startActivity(intent)
+                }
+            }
+        }
     }
 
-    private fun guardarDatos() {
-        // Validaciones básicas
-        val dniRegex = Regex("^[0-9]{8}[A-Za-z]\$")
-        val emailRegex = Regex("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")
-
-        val dniValido = etDNI.text.toString().matches(dniRegex)
-        val dniTutorValido = etDNITutor.text.toString().matches(dniRegex)
-        val emailValido = etEmailTutor.text.toString().matches(emailRegex)
-
-        if (etNombreApellidos.text.isEmpty() || !dniValido) {
-            Toast.makeText(this, "Introduce nombre y un DNI válido", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        if (etNombreTutor.text.isEmpty() || !dniTutorValido || !emailValido) {
-            Toast.makeText(this, "Datos del tutor incompletos o incorrectos", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        if (!cbProteccionDatos.isChecked || !cbFotosRedes.isChecked ||
-            !cbAsistenciaMedica.isChecked || !cbNormasEscuela.isChecked
-        ) {
-            Toast.makeText(this, "Debes aceptar todos los permisos", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        Toast.makeText(this, "Datos guardados correctamente ✅", Toast.LENGTH_LONG).show()
-    }
-
-    private fun limpiarCampos() {
-        listOf(
-            etNombreApellidos, etFechaNacimiento, etDNI, etDireccion, etTelefono,
-            etNombreTutor, etDNITutor, etTelefonoTutor, etEmailTutor,
-            etAlergias, etCondicionMedica, etMedicamentos, etTelefonoEmergencias
-        ).forEach { it.text.clear() }
-
-        cbProteccionDatos.isChecked = false
-        cbFotosRedes.isChecked = false
-        cbAsistenciaMedica.isChecked = false
-        cbNormasEscuela.isChecked = false
-
-        spTipoBicicleta.setSelection(0)
-        spTalla.setSelection(0)
-        spModalidad.setSelection(0)
-
-        Toast.makeText(this, "Formulario limpiado 🧹", Toast.LENGTH_SHORT).show()
+    private fun showToast(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
     }
 }

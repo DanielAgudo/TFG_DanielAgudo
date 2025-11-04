@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -21,7 +22,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Imagen superior (editable) -->
+            <!-- Imagen superior -->
             <ImageView
                 android:id="@+id/imgLogo"
                 android:layout_width="150dp"
@@ -366,29 +367,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="3"
-                android:gravity="center">
-
-                <Button
-                    android:id="@+id/btnGuardar"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Guardar" />
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
                 <Button
                     android:id="@+id/btnBorrar"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Borrar" />
+                    android:layout_weight="1"
+                    android:text="BORRAR"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#D32F2F"
+                    android:layout_margin="8dp" />
 
                 <Button
-                    android:id="@+id/btnVerLista"
+                    android:id="@+id/btnGuardar"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Ver Alumnos" />
+                    android:layout_weight="1"
+                    android:text="GUARDAR"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#4CAF50"
+                    android:layout_margin="8dp" />
             </LinearLayout>
 
         </LinearLayout>
