@@ -21,9 +21,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        // -------------------------
-        // Referencias a los elementos del XML
-        // -------------------------
+
         val etNombreApellidos = findViewById<EditText>(R.id.etNombreApellidos)
         val etFechaNacimiento = findViewById<EditText>(R.id.etFechaNacimiento)
         val etDNI = findViewById<EditText>(R.id.etDNI)
@@ -52,9 +50,7 @@ class MainActivity : AppCompatActivity() {
         val btnGuardar = findViewById<Button>(R.id.btnGuardar)
         val btnBorrar = findViewById<Button>(R.id.btnBorrar)
 
-        // -------------------------
-        // Llenar los spinners (si no lo haces desde strings.xml)
-        // -------------------------
+
         val opcionesTipo = arrayOf("Bici de carretera", "Bici de montaña", "Ambas")
         val opcionesTalla = arrayOf("XS", "S", "M", "L")
         val opcionesModalidad = arrayOf("Carretera", "Montaña", "Ambas")
@@ -66,9 +62,7 @@ class MainActivity : AppCompatActivity() {
         spModalidad.adapter =
             ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, opcionesModalidad)
 
-        // -------------------------
-        // BOTÓN BORRAR
-        // -------------------------
+        // ----BOTÓN BORRAR----
         btnBorrar.setOnClickListener {
             val editTexts = listOf(
                 etNombreApellidos, etFechaNacimiento, etDNI, etDireccion, etTelefono,
@@ -89,9 +83,8 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Formulario borrado correctamente", Toast.LENGTH_SHORT).show()
         }
 
-        // -------------------------
-        // BOTÓN GUARDAR
-        // -------------------------
+
+        // ----BOTÓN GUARDAR----
         btnGuardar.setOnClickListener {
             // Validaciones de los campos
             val dniRegex = Regex("^[0-9]{8}[A-Za-z]\$")
