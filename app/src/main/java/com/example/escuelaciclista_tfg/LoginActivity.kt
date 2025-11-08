@@ -37,14 +37,16 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Credenciales válidas (puedes cambiarlas si lo deseas)
-            val usuarioValido = "0001"
-            val passwordValido = "0001"
+            // Credenciales válidas
+            val usuarioValido1 = "0001"
+            val passwordValido1 = "0001"
 
             val usuarioValido2 = "0002"
             val passwordValido2 = "0002"
 
-            if (usuario == usuarioValido && password == passwordValido) {
+            if ((usuario == usuarioValido1 && password == passwordValido1) ||
+                (usuario == usuarioValido2 && password == passwordValido2)) {
+
                 // Login correcto → Ir a MainActivity
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
