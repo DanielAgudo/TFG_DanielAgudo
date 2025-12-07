@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    app:cardCornerRadius="18dp"
+    app:cardBackgroundColor="#4F7AC9"
+    app:cardElevation="6dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:padding="12dp">
+
+        <!-- NOMBRE PRINCIPAL -->
+        <TextView
+            android:id="@+id/tvNombreAlumno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NOMBRE"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"
+            android:background="#FFFFFF"
+            android:padding="4dp"
+            android:textColorHint="#000000" />
+
+        <!-- BOTÓN ELIMINAR (X) -->
+        <ImageView
+            android:id="@+id/btnEliminar"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:tint="#FF0000"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="4dp" />
+
+        <!-- DNI DEL ALUMNO -->
+        <TextView
+            android:id="@+id/tvDniAlumno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DNI Alum"
+            android:layout_marginTop="32dp"
+            android:background="#FFFFFF"
+            android:padding="4dp"
+            android:textColor="#000000"
+            android:layout_below="@id/tvNombreAlumno" />
+
+        <!-- TELÉFONO DEL TUTOR -->
+        <TextView
+            android:id="@+id/tvTelefonoTutor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Teléfono Tutor"
+            android:background="#FFFFFF"
+            android:padding="4dp"
+            android:textColor="#000000"
+            android:layout_below="@id/tvDniAlumno"
+            android:layout_marginTop="8dp" />
+
+        <!-- ICONO PERSONA -->
+        <ImageView
+            android:id="@+id/iconPersona"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@android:drawable/ic_menu_myplaces"
+            android:tint="#000000"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="12dp" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
