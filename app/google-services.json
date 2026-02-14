@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "715758807110",
+    "project_id": "escuela-ciclista-sesena-4d770",
+    "storage_bucket": "escuela-ciclista-sesena-4d770.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:715758807110:android:fdc9b0a555e754f9e6c247",
+        "android_client_info": {
+          "package_name": "com.example.escuelaciclista_tfg"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6Ua3Zy9PvYYVqZXqtlMqwwAr8ayaQTDQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

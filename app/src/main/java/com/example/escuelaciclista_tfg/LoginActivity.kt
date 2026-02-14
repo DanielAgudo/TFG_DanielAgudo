@@ -7,53 +7,55 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+
+import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
+
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+        auth = FirebaseAuth.getInstance()
 
-        // Referencias a los elementos del layout
         val etUsuario = findViewById<EditText>(R.id.etUsuario)
         val etPassword = findViewById<EditText>(R.id.etPassword)
         val btnAcceder = findViewById<Button>(R.id.btnAcceder)
 
-        // Acción del botón ACCEDER
         btnAcceder.setOnClickListener {
-            val usuario = etUsuario.text.toString().trim()
+
+            val email = etUsuario.text.toString().trim()
             val password = etPassword.text.toString().trim()
 
-            if (usuario.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Por favor, introduce usuario y contraseña", Toast.LENGTH_SHORT).show()
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Introduce email y contraseña", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // Credenciales válidas
-            val usuarioValido1 = "0001"
-            val passwordValido1 = "0001"
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
 
-            val usuarioValido2 = "0002"
-            val passwordValido2 = "0002"
+                    if (task.isSuccessful) {
 
-            if ((usuario == usuarioValido1 && password == passwordValido1) ||
-                (usuario == usuarioValido2 && password == passwordValido2)) {
+                        Toast.makeText(this, "Login correcto", Toast.LENGTH_SHORT).show()
 
-                // Login correcto → Ir a MainActivity
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
-            } else {
-                Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
-            }
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+
+                    } else {
+
+                        Toast.makeText(
+                            this,
+                            "Error: ${task.exception?.message}",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
         }
     }
 }
+
