@@ -7,24 +7,25 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-
-import com.google.firebase.analytics.ktx.analytics
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.firestore.FirebaseFirestore
 
 class MainActivity : AppCompatActivity() {
+
+    // 🔥 Instancia Firestore
+    private val db = FirebaseFirestore.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        // Mantener compatibilidad con tu estructura base
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-
+        // ---------------- CAMPOS ----------------
         val etNombreApellidos = findViewById<EditText>(R.id.etNombreApellidos)
         val etFechaNacimiento = findViewById<EditText>(R.id.etFechaNacimiento)
         val etDNI = findViewById<EditText>(R.id.etDNI)
@@ -53,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         val btnGuardar = findViewById<Button>(R.id.btnGuardar)
         val btnBorrar = findViewById<Button>(R.id.btnBorrar)
 
-
+        // ---------------- SPINNERS ----------------
         val opcionesTipo = arrayOf("Bici de carretera", "Bici de montaña", "Ambas")
         val opcionesTalla = arrayOf("XS", "S", "M", "L")
         val opcionesModalidad = arrayOf("Carretera", "Montaña", "Ambas")
@@ -65,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         spModalidad.adapter =
             ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, opcionesModalidad)
 
-        // ----BOTÓN BORRAR----
+        // ---------------- BOTÓN BORRAR ----------------
         btnBorrar.setOnClickListener {
             val editTexts = listOf(
                 etNombreApellidos, etFechaNacimiento, etDNI, etDireccion, etTelefono,
@@ -86,10 +87,9 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Formulario borrado correctamente", Toast.LENGTH_SHORT).show()
         }
 
-
-        // ----BOTÓN GUARDAR----
+        // ---------------- BOTÓN GUARDAR ----------------
         btnGuardar.setOnClickListener {
-            // Validaciones de los campos
+
             val dniRegex = Regex("^[0-9]{8}[A-Za-z]\$")
             val emailRegex = Regex("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")
 
@@ -110,10 +110,40 @@ class MainActivity : AppCompatActivity() {
                     showToast("Debes aceptar todos los permisos antes de continuar")
 
                 else -> {
-                    Toast.makeText(this, "Datos guardados correctamente", Toast.LENGTH_SHORT).show()
-                    // Navegar a la segunda pantalla (MainActivity2)
-                    val intent = Intent(this, MainActivity2::class.java)
-                    startActivity(intent)
+
+                    // 🔥 Creamos mapa con TODOS los datos
+                    val alumno = hashMapOf(
+                        "nombre_apellidos" to etNombreApellidos.text.toString(),
+                        "fecha_nacimiento" to etFechaNacimiento.text.toString(),
+                        "dni" to etDNI.text.toString(),
+                        "direccion" to etDireccion.text.toString(),
+                        "telefono" to etTelefono.text.toString(),
+                        "nombre_tutor" to etNombreTutor.text.toString(),
+                        "dni_tutor" to etDNITutor.text.toString(),
+                        "telefono_tutor" to etTelefonoTutor.text.toString(),
+                        "email_tutor" to etEmailTutor.text.toString(),
+                        "alergias" to etAlergias.text.toString(),
+                        "condicion_medica" to etCondicionMedica.text.toString(),
+                        "medicamentos" to etMedicamentos.text.toString(),
+                        "telefono_emergencias" to etTelefonoEmergencias.text.toString(),
+                        "tipo_bicicleta" to spTipoBicicleta.selectedItem.toString(),
+                        "talla" to spTalla.selectedItem.toString(),
+                        "modalidad" to spModalidad.selectedItem.toString()
+                    )
+
+                    // 🔥 Guardar en Firebase
+                    db.collection("alumnos")
+                        .add(alumno)
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Alumno guardado correctamente", Toast.LENGTH_SHORT).show()
+
+                            // Ir a la lista solo si se guardó bien
+                            val intent = Intent(this, MainActivity2::class.java)
+                            startActivity(intent)
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(this, "Error al guardar en Firebase", Toast.LENGTH_LONG).show()
+                        }
                 }
             }
         }
