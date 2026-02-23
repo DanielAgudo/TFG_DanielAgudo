@@ -22,7 +22,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Imagen superior -->
+            <!--Imagen superior-->
             <ImageView
                 android:id="@+id/imgLogo"
                 android:layout_width="150dp"
@@ -42,7 +42,7 @@
                 android:textSize="18sp"
                 android:layout_marginBottom="10dp" />
 
-            <!-- Nombre y apellidos -->
+            <!--Nombre y apellidos-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
                     android:inputType="textPersonName" />
             </LinearLayout>
 
-            <!-- Fecha de nacimiento -->
+            <!--Fecha de nacimiento-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
                     android:inputType="date" />
             </LinearLayout>
 
-            <!-- DNI -->
+            <!--DNI-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -105,7 +105,7 @@
                     android:inputType="text" />
             </LinearLayout>
 
-            <!-- Dirección -->
+            <!--Dirección-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -126,7 +126,7 @@
                     android:inputType="textPostalAddress" />
             </LinearLayout>
 
-            <!-- Teléfono -->
+            <!--Teléfono-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -147,10 +147,10 @@
                     android:inputType="phone" />
             </LinearLayout>
 
-            <!-- ESPACIO -->
+            <!--ESPACIO-->
             <View android:layout_width="match_parent" android:layout_height="24dp" />
 
-            <!-- ========== DATOS DEL TUTOR ========== -->
+            <!--DATOS DEL TUTOR-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -160,7 +160,7 @@
                 android:textSize="18sp"
                 android:layout_marginBottom="10dp" />
 
-            <!-- Nombre tutor -->
+            <!--Nombre tutor-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -180,7 +180,7 @@
                     android:inputType="textPersonName" />
             </LinearLayout>
 
-            <!-- DNI tutor -->
+            <!--DNI tutor-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -202,7 +202,7 @@
                     android:inputType="text" />
             </LinearLayout>
 
-            <!-- Teléfono tutor -->
+            <!--Teléfono tutor-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -223,7 +223,7 @@
                     android:inputType="phone" />
             </LinearLayout>
 
-            <!-- Email tutor -->
+            <!--Email tutor-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -244,10 +244,10 @@
                     android:inputType="textEmailAddress" />
             </LinearLayout>
 
-            <!-- ESPACIO -->
+            <!--ESPACIO-->
             <View android:layout_width="match_parent" android:layout_height="24dp" />
 
-            <!-- ========== DATOS MÉDICOS ========== -->
+            <!--DATOS MÉDICOS-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -322,10 +322,10 @@
                 android:prompt="@string/prompt_modalidad" />
 
 
-            <!-- ESPACIO -->
+            <!--ESPACIO-->
             <View android:layout_width="match_parent" android:layout_height="24dp" />
 
-            <!-- ========== PERMISOS ========== -->
+            <!--PERMISOS-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -359,10 +359,10 @@
                 android:layout_height="wrap_content"
                 android:text="Conozco las normas de la escuela" />
 
-            <!-- ESPACIO FINAL -->
+            <!--ESPACIO FINAL-->
             <View android:layout_width="match_parent" android:layout_height="24dp" />
 
-            <!-- Botones -->
+            <!--Botones-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

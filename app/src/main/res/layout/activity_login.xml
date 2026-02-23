@@ -9,7 +9,7 @@
     android:background="#201975"
     tools:context=".LoginActivity">
 
-    <!-- Logo centrado -->
+    <!--Logo centrado-->
     <ImageView
         android:id="@+id/imgLogo"
         android:layout_width="150dp"
@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Campo Usuario -->
+    <!--Campo Usuario-->
     <EditText
         android:id="@+id/etUsuario"
         android:layout_width="0dp"
@@ -39,7 +39,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp" />
 
-    <!-- Campo Contraseña -->
+    <!--Campo Contraseña-->
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="0dp"
@@ -57,7 +57,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp" />
 
-    <!-- Botón ACCEDER -->
+    <!--Botón ACCEDER-->
     <Button
         android:id="@+id/btnAcceder"
         android:layout_width="0dp"

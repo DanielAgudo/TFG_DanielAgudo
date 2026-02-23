@@ -11,7 +11,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class MainActivity : AppCompatActivity() {
 
-    // 🔥 Instancia Firestore
+    //Instancia Firestore
     private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        // ---------------- CAMPOS ----------------
+        //CAMPOS
         val etNombreApellidos = findViewById<EditText>(R.id.etNombreApellidos)
         val etFechaNacimiento = findViewById<EditText>(R.id.etFechaNacimiento)
         val etDNI = findViewById<EditText>(R.id.etDNI)
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         val btnGuardar = findViewById<Button>(R.id.btnGuardar)
         val btnBorrar = findViewById<Button>(R.id.btnBorrar)
 
-        // ---------------- SPINNERS ----------------
+        //SPINNERS
         val opcionesTipo = arrayOf("Bici de carretera", "Bici de montaña", "Ambas")
         val opcionesTalla = arrayOf("XS", "S", "M", "L")
         val opcionesModalidad = arrayOf("Carretera", "Montaña", "Ambas")
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         spModalidad.adapter =
             ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, opcionesModalidad)
 
-        // ---------------- BOTÓN BORRAR ----------------
+        //BOTÓN BORRAR
         btnBorrar.setOnClickListener {
             val editTexts = listOf(
                 etNombreApellidos, etFechaNacimiento, etDNI, etDireccion, etTelefono,
@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Formulario borrado correctamente", Toast.LENGTH_SHORT).show()
         }
 
-        // ---------------- BOTÓN GUARDAR ----------------
+        //BOTÓN GUARDAR
         btnGuardar.setOnClickListener {
 
             val dniRegex = Regex("^[0-9]{8}[A-Za-z]\$")
@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity() {
 
                 else -> {
 
-                    // 🔥 Creamos mapa con TODOS los datos
+                    //mapa con TODOS los datos
                     val alumno = hashMapOf(
                         "nombre_apellidos" to etNombreApellidos.text.toString(),
                         "fecha_nacimiento" to etFechaNacimiento.text.toString(),
@@ -131,7 +131,7 @@ class MainActivity : AppCompatActivity() {
                         "modalidad" to spModalidad.selectedItem.toString()
                     )
 
-                    // 🔥 Guardar en Firebase
+                    //Guardar en Firebase
                     db.collection("alumnos")
                         .add(alumno)
                         .addOnSuccessListener {
