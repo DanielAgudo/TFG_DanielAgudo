@@ -6,7 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#201975"
+    android:background="#000000"
     tools:context=".LoginActivity">
 
     <!--Logo centrado-->
@@ -15,7 +15,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="80dp"
-        android:src="@drawable/ic_launcher_foreground"
+        android:src="@drawable/logo"
         android:contentDescription="Logo Escuela Ciclista"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +65,7 @@
         android:text="ACCEDER"
         android:textStyle="bold"
         android:textColor="#FFFFFF"
-        android:backgroundTint="#4CAF50"
+        android:backgroundTint="#071C47"
         android:padding="12dp"
         app:layout_constraintTop_toBottomOf="@id/etPassword"
         app:layout_constraintStart_toStartOf="parent"

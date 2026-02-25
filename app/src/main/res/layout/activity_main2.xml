@@ -4,13 +4,16 @@
     android:orientation="vertical"
     android:padding="12dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#808080"
+    >
 
     <SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:queryHint="Buscar alumno por nombre"/>
+        android:queryHint="Buscar alumno por nombre"
+        android:background="#FFFFFF"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerAlumnos"

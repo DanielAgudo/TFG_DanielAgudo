@@ -6,6 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".MainActivity">
 
     <ScrollView
@@ -29,7 +30,7 @@
                 android:layout_height="150dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
-                android:src="@drawable/ic_launcher_foreground"
+                android:src="@drawable/logo"
                 android:contentDescription="Logo Escuela" />
 
             <!-- DATOS PERSONALES-->
@@ -37,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="DATOS PERSONALES"
-                android:textColor="#000000"
+                android:textColor="#FFFFFF"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:layout_marginBottom="10dp" />
@@ -51,7 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="NOMBRE Y APELLIDOS:"
-                    android:textColor="#000"
+                    android:textColor="#FFFFFF"
                     android:layout_marginEnd="8dp" />
                 <EditText
                     android:id="@+id/etNombreApellidos"
@@ -59,6 +60,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="Introduce nombre y apellidos"
+                    android:textColorHint="#808080"
                     android:inputType="textPersonName" />
             </LinearLayout>
 
@@ -72,7 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="FECHA DE NACIMIENTO:"
-                    android:textColor="#000"
+                    android:textColor="#FFFFFF"
                     android:layout_marginEnd="8dp" />
                 <EditText
                     android:id="@+id/etFechaNacimiento"
@@ -80,6 +82,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="dd/mm/aaaa"
+                    android:textColorHint="#808080"
                     android:inputType="date" />
             </LinearLayout>
 
@@ -93,7 +96,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="DNI / NIF:"
-                    android:textColor="#000"
+                    android:textColor="#FFFFFF"
                     android:layout_marginEnd="8dp" />
                 <EditText
                     android:id="@+id/etDNI"
@@ -101,6 +104,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="8 dígitos + letra"
+                    android:textColorHint="#808080"
                     android:maxLength="9"
                     android:inputType="text" />
             </LinearLayout>
@@ -115,7 +119,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="DIRECCIÓN:"
-                    android:textColor="#000"
+                    android:textColor="#FFFFFF"
                     android:layout_marginEnd="8dp" />
                 <EditText
                     android:id="@+id/etDireccion"
@@ -123,6 +127,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="Calle y número"
+                    android:textColorHint="#808080"
                     android:inputType="textPostalAddress" />
             </LinearLayout>
 
@@ -135,8 +140,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TELÉFONO (opcional):"
-                    android:textColor="#000"
+                    android:text="TELÉFONO:"
+                    android:textColor="#FFFFFF"
                     android:layout_marginEnd="8dp" />
                 <EditText
                     android:id="@+id/etTelefono"
@@ -144,6 +149,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="Teléfono del alumno"
+                    android:textColorHint="#808080"
                     android:inputType="phone" />
             </LinearLayout>
 
@@ -155,7 +161,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="DATOS DEL TUTOR"
-                android:textColor="#000000"
+                android:textColor="#FFFFFF"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:layout_marginBottom="10dp" />
@@ -169,7 +175,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="NOMBRE Y APELLIDOS:"
-                    android:textColor="#000"
+                    android:textColor="#FFFFFF"
                     android:layout_marginEnd="8dp" />
                 <EditText
                     android:id="@+id/etNombreTutor"
@@ -177,6 +183,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="Nombre completo del tutor"
+                    android:textColorHint="#808080"
                     android:inputType="textPersonName" />
             </LinearLayout>
 
@@ -190,7 +197,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="DNI / NIF:"
-                    android:textColor="#000"
+                    android:textColor="#FFFFFF"
                     android:layout_marginEnd="8dp" />
                 <EditText
                     android:id="@+id/etDNITutor"
@@ -198,6 +205,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="8 dígitos + letra"
+                    android:textColorHint="#808080"
                     android:maxLength="9"
                     android:inputType="text" />
             </LinearLayout>
@@ -212,14 +220,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="TELÉFONO:"
-                    android:textColor="#000"
+                    android:textColor="#FFFFFF"
                     android:layout_marginEnd="8dp" />
                 <EditText
                     android:id="@+id/etTelefonoTutor"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="Teléfono obligatorio si menor"
+                    android:hint="Teléfono del tutor"
+                    android:textColorHint="#808080"
                     android:inputType="phone" />
             </LinearLayout>
 
@@ -233,7 +242,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="CORREO ELECTRÓNICO:"
-                    android:textColor="#000"
+                    android:textColor="#FFFFFF"
                     android:layout_marginEnd="8dp" />
                 <EditText
                     android:id="@+id/etEmailTutor"
@@ -241,6 +250,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="ejemplo@email.com"
+                    android:textColorHint="#808080"
                     android:inputType="textEmailAddress" />
             </LinearLayout>
 
@@ -252,7 +262,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="DATOS MÉDICOS"
-                android:textColor="#000000"
+                android:textColor="#FFFFFF"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:layout_marginBottom="10dp" />
@@ -262,6 +272,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Alergias"
+                android:textColorHint="#808080"
                 android:inputType="textMultiLine" />
 
             <EditText
@@ -269,6 +280,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Condición médica"
+                android:textColorHint="#808080"
                 android:inputType="textMultiLine"
                 android:layout_marginTop="8dp" />
 
@@ -277,6 +289,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Medicamentos"
+                android:textColorHint="#808080"
                 android:inputType="textMultiLine"
                 android:layout_marginTop="8dp" />
 
@@ -285,6 +298,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Teléfono de emergencias"
+                android:textColorHint="#808080"
                 android:inputType="phone"
                 android:layout_marginTop="8dp" />
 
@@ -296,7 +310,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="INFORMACIÓN SOBRE EL DEPORTE"
-                android:textColor="#000000"
+                android:textColor="#FFFFFF"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:layout_marginBottom="10dp" />
@@ -330,7 +344,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="PERMISOS"
-                android:textColor="#000000"
+                android:textColor="#FFFFFF"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:layout_marginBottom="10dp" />
@@ -339,27 +353,31 @@
                 android:id="@+id/cbProteccionDatos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Conozco la ley de protección de datos" />
+                android:text="Conozco la ley de protección de datos"
+                android:textColor="#FFFFFF"/>
 
             <CheckBox
                 android:id="@+id/cbFotosRedes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Autorizo salir en fotos y redes sociales" />
+                android:text="Autorizo salir en fotos y redes sociales"
+                android:textColor="#FFFFFF"/>
 
             <CheckBox
                 android:id="@+id/cbAsistenciaMedica"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Autorizo asistencia médica en caso de emergencia" />
+                android:text="Autorizo asistencia médica en caso de emergencia"
+                android:textColor="#FFFFFF"/>
 
             <CheckBox
                 android:id="@+id/cbNormasEscuela"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Conozco las normas de la escuela" />
+                android:text="Conozco las normas de la escuela"
+                android:textColor="#FFFFFF"/>
 
-            <!--ESPACIO FINAL-->
+            <!--ESPACIO-->
             <View android:layout_width="match_parent" android:layout_height="24dp" />
 
             <!--Botones-->
@@ -392,7 +410,7 @@
                     android:text="GUARDAR"
                     android:textStyle="bold"
                     android:textColor="#FFFFFF"
-                    android:backgroundTint="#4CAF50"
+                    android:backgroundTint="#071C47"
                     android:layout_margin="8dp" />
             </LinearLayout>
 
