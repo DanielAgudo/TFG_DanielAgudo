@@ -33,6 +33,15 @@
                 android:src="@drawable/logo"
                 android:contentDescription="Logo Escuela" />
 
+            <!--Mensaje informativo-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Los campos marcados como (obligatorio) deben rellenarse para registrar al alumno."
+                android:textColor="#BDBDBD"
+                android:textSize="14sp"
+                android:layout_marginBottom="16dp"/>
+
             <!-- DATOS PERSONALES-->
             <TextView
                 android:layout_width="match_parent"
@@ -51,7 +60,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="NOMBRE Y APELLIDOS:"
+                    android:text="NOMBRE Y APELLIDOS (obligatorio):"
                     android:textColor="#FFFFFF"
                     android:layout_marginEnd="8dp" />
                 <EditText
@@ -73,7 +82,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="FECHA DE NACIMIENTO:"
+                    android:text="FECHA DE NACIMIENTO (obligatorio):"
                     android:textColor="#FFFFFF"
                     android:layout_marginEnd="8dp" />
                 <EditText
@@ -95,7 +104,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="DNI / NIF:"
+                    android:text="DNI / NIF (obligatorio):"
                     android:textColor="#FFFFFF"
                     android:layout_marginEnd="8dp" />
                 <EditText
@@ -118,7 +127,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="DIRECCIÓN:"
+                    android:text="DIRECCIÓN (obligatorio):"
                     android:textColor="#FFFFFF"
                     android:layout_marginEnd="8dp" />
                 <EditText
@@ -174,7 +183,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="NOMBRE Y APELLIDOS:"
+                    android:text="NOMBRE Y APELLIDOS (obligatorio):"
                     android:textColor="#FFFFFF"
                     android:layout_marginEnd="8dp" />
                 <EditText
@@ -196,7 +205,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="DNI / NIF:"
+                    android:text="DNI / NIF (obligatorio):"
                     android:textColor="#FFFFFF"
                     android:layout_marginEnd="8dp" />
                 <EditText
@@ -219,7 +228,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TELÉFONO:"
+                    android:text="TELÉFONO (obligatorio):"
                     android:textColor="#FFFFFF"
                     android:layout_marginEnd="8dp" />
                 <EditText
@@ -241,7 +250,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="CORREO ELECTRÓNICO:"
+                    android:text="CORREO ELECTRÓNICO (obligatorio):"
                     android:textColor="#FFFFFF"
                     android:layout_marginEnd="8dp" />
                 <EditText

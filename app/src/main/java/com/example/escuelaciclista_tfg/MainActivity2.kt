@@ -52,9 +52,10 @@ class MainActivity2 : AppCompatActivity() {
             }
     }
 
+    // BUSCADOR POR DNI
     private fun filtrar(texto: String) {
         val listaFiltrada = listaAlumnos.filter {
-            it.nombre_apellidos.lowercase().contains(texto.lowercase())
+            it.dni.lowercase().contains(texto.lowercase())
         }
         adapter.actualizarLista(listaFiltrada)
     }

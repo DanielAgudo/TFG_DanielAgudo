@@ -11,7 +11,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class MainActivity : AppCompatActivity() {
 
-    //Instancia Firestore
     private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +24,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        //CAMPOS
+        // CAMPOS
         val etNombreApellidos = findViewById<EditText>(R.id.etNombreApellidos)
         val etFechaNacimiento = findViewById<EditText>(R.id.etFechaNacimiento)
         val etDNI = findViewById<EditText>(R.id.etDNI)
@@ -54,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         val btnGuardar = findViewById<Button>(R.id.btnGuardar)
         val btnBorrar = findViewById<Button>(R.id.btnBorrar)
 
-        //SPINNERS
+        // SPINNERS
         val opcionesTipo = arrayOf("Bici de carretera", "Bici de montaña", "Ambas")
         val opcionesTalla = arrayOf("XS", "S", "M", "L")
         val opcionesModalidad = arrayOf("Carretera", "Montaña", "Ambas")
@@ -66,13 +65,15 @@ class MainActivity : AppCompatActivity() {
         spModalidad.adapter =
             ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, opcionesModalidad)
 
-        //BOTÓN BORRAR
+        // BOTÓN BORRAR
         btnBorrar.setOnClickListener {
+
             val editTexts = listOf(
                 etNombreApellidos, etFechaNacimiento, etDNI, etDireccion, etTelefono,
                 etNombreTutor, etDNITutor, etTelefonoTutor, etEmailTutor,
                 etAlergias, etCondicionMedica, etMedicamentos, etTelefonoEmergencias
             )
+
             editTexts.forEach { it.text.clear() }
 
             cbProteccionDatos.isChecked = false
@@ -87,39 +88,52 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Formulario borrado correctamente", Toast.LENGTH_SHORT).show()
         }
 
-        //BOTÓN GUARDAR
+        // BOTÓN GUARDAR
         btnGuardar.setOnClickListener {
 
-            val dniRegex = Regex("^[0-9]{8}[A-Za-z]\$")
+            val dniRegex = Regex("^[0-9]{8}[A-Za-z]$")
             val emailRegex = Regex("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")
 
+            val dniAlumno = etDNI.text.toString()
+            val dniTutor = etDNITutor.text.toString()
+
             when {
+
+                // DATOS ALUMNO
                 etNombreApellidos.text.isBlank() -> showToast("Introduce el nombre y apellidos del alumno")
                 etFechaNacimiento.text.isBlank() -> showToast("Introduce la fecha de nacimiento")
-                etDNI.text.isBlank() -> showToast("Introduce el DNI del alumno")
-                !dniRegex.matches(etDNI.text.toString()) -> showToast("El formato del DNI no es válido")
+                dniAlumno.isBlank() -> showToast("Introduce el DNI del alumno")
+                !dniRegex.matches(dniAlumno) -> showToast("El formato del DNI del alumno no es válido")
                 etDireccion.text.isBlank() -> showToast("Introduce la dirección del alumno")
+
+                // DATOS TUTOR
                 etNombreTutor.text.isBlank() -> showToast("Introduce el nombre del tutor")
-                etDNITutor.text.isBlank() -> showToast("Introduce el DNI del tutor")
-                !dniRegex.matches(etDNITutor.text.toString()) -> showToast("El formato del DNI del tutor no es válido")
+                dniTutor.isBlank() -> showToast("Introduce el DNI del tutor")
+                !dniRegex.matches(dniTutor) -> showToast("El formato del DNI del tutor no es válido")
                 etTelefonoTutor.text.isBlank() -> showToast("Introduce el teléfono del tutor")
                 etEmailTutor.text.isBlank() -> showToast("Introduce el correo electrónico del tutor")
                 !emailRegex.matches(etEmailTutor.text.toString()) -> showToast("El correo electrónico no es válido")
-                !cbProteccionDatos.isChecked || !cbFotosRedes.isChecked ||
-                        !cbAsistenciaMedica.isChecked || !cbNormasEscuela.isChecked ->
-                    showToast("Debes aceptar todos los permisos antes de continuar")
+
+                // DNI NO PUEDE SER IGUAL
+                dniAlumno == dniTutor -> showToast("El DNI del alumno no puede ser igual al del tutor")
+
+                // PERMISOS
+                !cbProteccionDatos.isChecked ||
+                        !cbFotosRedes.isChecked ||
+                        !cbAsistenciaMedica.isChecked ||
+                        !cbNormasEscuela.isChecked ->
+                    showToast("Debes aceptar todos los permisos")
 
                 else -> {
 
-                    //mapa con TODOS los datos
                     val alumno = hashMapOf(
                         "nombre_apellidos" to etNombreApellidos.text.toString(),
                         "fecha_nacimiento" to etFechaNacimiento.text.toString(),
-                        "dni" to etDNI.text.toString(),
+                        "dni" to dniAlumno,
                         "direccion" to etDireccion.text.toString(),
                         "telefono" to etTelefono.text.toString(),
                         "nombre_tutor" to etNombreTutor.text.toString(),
-                        "dni_tutor" to etDNITutor.text.toString(),
+                        "dni_tutor" to dniTutor,
                         "telefono_tutor" to etTelefonoTutor.text.toString(),
                         "email_tutor" to etEmailTutor.text.toString(),
                         "alergias" to etAlergias.text.toString(),
@@ -131,18 +145,29 @@ class MainActivity : AppCompatActivity() {
                         "modalidad" to spModalidad.selectedItem.toString()
                     )
 
-                    //Guardar en Firebase
+                    // COMPROBAR DUPLICADOS EN FIREBASE
                     db.collection("alumnos")
-                        .add(alumno)
-                        .addOnSuccessListener {
-                            Toast.makeText(this, "Alumno guardado correctamente", Toast.LENGTH_SHORT).show()
+                        .whereEqualTo("dni", dniAlumno)
+                        .get()
+                        .addOnSuccessListener { documents ->
 
-                            // Ir a la lista solo si se guardó bien
-                            val intent = Intent(this, MainActivity2::class.java)
-                            startActivity(intent)
-                        }
-                        .addOnFailureListener {
-                            Toast.makeText(this, "Error al guardar en Firebase", Toast.LENGTH_LONG).show()
+                            if (!documents.isEmpty) {
+                                Toast.makeText(this, "Ya existe un alumno con ese DNI", Toast.LENGTH_LONG).show()
+                            } else {
+
+                                db.collection("alumnos")
+                                    .add(alumno)
+                                    .addOnSuccessListener {
+
+                                        Toast.makeText(this, "Alumno guardado correctamente", Toast.LENGTH_SHORT).show()
+
+                                        val intent = Intent(this, MainActivity2::class.java)
+                                        startActivity(intent)
+                                    }
+                                    .addOnFailureListener {
+                                        Toast.makeText(this, "Error al guardar en Firebase", Toast.LENGTH_LONG).show()
+                                    }
+                            }
                         }
                 }
             }
