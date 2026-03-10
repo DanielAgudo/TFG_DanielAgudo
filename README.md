@@ -62,12 +62,15 @@ IES Las Salinas
 
 Al iniciar la aplicación, deberás acceder con un usuario válido introduciendo correo electrónico (Gmail) y contraseña.
 
-Puedes utilizar el siguiente usuario de prueba:
+Puedes utilizar las siguientes credenciales:
 
-- Correo: director1@gmail.com
+- Correo 1: director1@gmail.com 
+- Contraseña 1: director1
 
-- Contraseña: director1
+- Correo 2: director2@gmail.com 
+- Contraseña 2: director2
 
+  
 Una vez introducidos los datos, pulsa el botón Iniciar sesión.
 Si las credenciales son correctas, accederás al menú principal de la aplicación.
 
