@@ -1,6 +1,8 @@
 package com.example.escuelaciclista_tfg
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +14,7 @@ class MainActivity2 : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var searchView: SearchView
     private lateinit var adapter: AlumnoAdapter
+    private lateinit var btnMenu: Button
 
     private var listaAlumnos = mutableListOf<Alumno>()
     private val db = FirebaseFirestore.getInstance()
@@ -22,6 +25,7 @@ class MainActivity2 : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerAlumnos)
         searchView = findViewById(R.id.searchView)
+        btnMenu = findViewById(R.id.btnMenu)
 
         adapter = AlumnoAdapter(listaAlumnos)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -37,6 +41,12 @@ class MainActivity2 : AppCompatActivity() {
                 return true
             }
         })
+
+        // 🔹 Funcionalidad para ir a MenuActivity
+        btnMenu.setOnClickListener {
+            val intent = Intent(this, MenuActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun cargarAlumnos() {
