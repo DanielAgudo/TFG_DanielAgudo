@@ -297,7 +297,7 @@
                 android:id="@+id/etTelefonoEmergencias"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Teléfono de emergencias"
+                android:hint="Teléfono de contacto"
                 android:textColorHint="#808080"
                 android:inputType="phone"
                 android:layout_marginTop="8dp" />

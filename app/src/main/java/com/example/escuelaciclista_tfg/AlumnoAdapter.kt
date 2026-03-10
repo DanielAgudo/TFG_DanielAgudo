@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-
 class AlumnoAdapter(private var lista: List<Alumno>) :
     RecyclerView.Adapter<AlumnoAdapter.ViewHolder>() {
 
@@ -28,7 +27,7 @@ class AlumnoAdapter(private var lista: List<Alumno>) :
         val alumno = lista[position]
         holder.nombre.text = alumno.nombre_apellidos
         holder.dni.text = "DNI: ${alumno.dni}"
-        holder.telefonoTutor.text = "Tutor: ${alumno.telefono_tutor}"
+        holder.telefonoTutor.text = "Telefono Tutor: ${alumno.telefono_tutor}"
         holder.modalidad.text = "Modalidad: ${alumno.modalidad}"
     }
 

@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!--Campo Usuario-->
+    <!--Usuario-->
     <EditText
         android:id="@+id/etUsuario"
         android:layout_width="0dp"
@@ -39,7 +39,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp" />
 
-    <!--Campo Contraseña-->
+    <!--Contraseña-->
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="0dp"
