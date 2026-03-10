@@ -66,7 +66,7 @@ Puedes utilizar las siguientes credenciales:
 
 - Correo 1: director1@gmail.com 
 - Contraseña 1: director1
-
+##
 - Correo 2: director2@gmail.com 
 - Contraseña 2: director2
 
