@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1D1D1D">
+    android:background="#D7D2D2">
 
     <LinearLayout
         android:orientation="vertical"
@@ -15,7 +15,7 @@
             android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:queryHint="Buscar alumno por nombre"
+            android:queryHint="Buscar alumno por DNI"
             android:background="#FFFFFF"/>
 
         <androidx.recyclerview.widget.RecyclerView

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -42,7 +43,6 @@ class MainActivity2 : AppCompatActivity() {
             }
         })
 
-        // 🔹 Funcionalidad para ir a MenuActivity
         btnMenu.setOnClickListener {
             val intent = Intent(this, MenuActivity::class.java)
             startActivity(intent)
@@ -53,16 +53,21 @@ class MainActivity2 : AppCompatActivity() {
         db.collection("alumnos")
             .get()
             .addOnSuccessListener { result ->
+
                 listaAlumnos.clear()
+
                 for (document in result) {
                     val alumno = document.toObject(Alumno::class.java)
                     listaAlumnos.add(alumno)
                 }
-                adapter.notifyDataSetChanged()
+
+                adapter.actualizarLista(listaAlumnos)
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_LONG).show()
             }
     }
 
-    // BUSCADOR POR DNI
     private fun filtrar(texto: String) {
         val listaFiltrada = listaAlumnos.filter {
             it.dni.lowercase().contains(texto.lowercase())
