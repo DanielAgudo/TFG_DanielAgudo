@@ -1,7 +1,6 @@
 package com.example.escuelaciclista_tfg
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -34,13 +33,7 @@ class DatosTutorActivity : AppCompatActivity() {
         val btnGuardar = findViewById<Button>(R.id.btnGuardar)
         val btnBorrar = findViewById<Button>(R.id.btnBorrar)
 
-        // TEXTVIEW AUTOMÁTICOS
-        val tvNombre = (etNombreTutor.parent as LinearLayout).getChildAt(0) as TextView
-        val tvDni = (etDniTutor.parent as LinearLayout).getChildAt(0) as TextView
-        val tvTelefono = (etTelefonoTutor.parent as LinearLayout).getChildAt(0) as TextView
-        val tvEmail = (etEmailTutor.parent as LinearLayout).getChildAt(0) as TextView
-
-        // AUTO LETRA DNI (IMPORTANTE)
+        // AUTO LETRA DNI
         etDniTutor.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val texto = s.toString()
@@ -56,22 +49,22 @@ class DatosTutorActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
 
-        // BOTÓN BORRAR
+        // BORRAR
         btnBorrar.setOnClickListener {
             etNombreTutor.text.clear()
             etDniTutor.text.clear()
             etTelefonoTutor.text.clear()
             etEmailTutor.text.clear()
 
-            resetColores(tvNombre, tvDni, tvTelefono, tvEmail)
+            limpiarErrores(etNombreTutor, etDniTutor, etTelefonoTutor, etEmailTutor)
 
             Toast.makeText(this, "Formulario borrado", Toast.LENGTH_SHORT).show()
         }
 
-        // BOTÓN GUARDAR (SIGUIENTE)
+        // GUARDAR
         btnGuardar.setOnClickListener {
 
-            resetColores(tvNombre, tvDni, tvTelefono, tvEmail)
+            limpiarErrores(etNombreTutor, etDniTutor, etTelefonoTutor, etEmailTutor)
 
             val nombreTutor = etNombreTutor.text.toString()
             val dniTutor = etDniTutor.text.toString()
@@ -83,32 +76,30 @@ class DatosTutorActivity : AppCompatActivity() {
 
             var valido = true
 
-            if (nombreTutor.isEmpty()) {
-                tvNombre.setTextColor(Color.RED)
+            // VALIDACIONES
+            if (nombreTutor.isBlank()) {
+                etNombreTutor.error = "Campo obligatorio"
                 valido = false
             }
 
             if (!dniRegex.matches(dniTutor)) {
-                tvDni.setTextColor(Color.RED)
-                Toast.makeText(this, "DNI inválido", Toast.LENGTH_SHORT).show()
+                etDniTutor.error = "DNI inválido"
                 valido = false
             }
 
-            if (telefonoTutor.isEmpty()) {
-                tvTelefono.setTextColor(Color.RED)
+            if (telefonoTutor.isBlank()) {
+                etTelefonoTutor.error = "Campo obligatorio"
                 valido = false
             }
 
             if (!emailRegex.matches(emailTutor)) {
-                tvEmail.setTextColor(Color.RED)
-                Toast.makeText(this, "Email inválido", Toast.LENGTH_SHORT).show()
+                etEmailTutor.error = "Email inválido"
                 valido = false
             }
 
             // DNI IGUAL AL ALUMNO
             if (dniTutor == dniAlumno) {
-                tvDni.setTextColor(Color.RED)
-                Toast.makeText(this, "El DNI del tutor no puede ser igual al del alumno", Toast.LENGTH_LONG).show()
+                etDniTutor.error = "No puede ser igual al DNI del alumno"
                 valido = false
             }
 
@@ -121,10 +112,9 @@ class DatosTutorActivity : AppCompatActivity() {
                 .addOnSuccessListener { documentos ->
 
                     if (!documentos.isEmpty) {
-                        Toast.makeText(this, "Este DNI de tutor ya está registrado", Toast.LENGTH_LONG).show()
+                        etDniTutor.error = "Este DNI ya está registrado"
                     } else {
 
-                        // PASAR TODO
                         val intent = Intent(this, DatosMedicosActivity::class.java)
 
                         intent.putExtra("nombre", nombre)
@@ -144,11 +134,11 @@ class DatosTutorActivity : AppCompatActivity() {
         }
     }
 
-    private fun resetColores(vararg textViews: TextView) {
-        textViews.forEach { it.setTextColor(Color.WHITE) }
+    private fun limpiarErrores(vararg editTexts: EditText) {
+        editTexts.forEach { it.error = null }
     }
 
-    // CÁLCULO LETRA DNI
+    // LETRA DNI
     private fun calcularLetraDNI(dni: String): String {
         val letras = "TRWAGMYFPDXBNJZSQVHLCKE"
         val numero = dni.toInt()

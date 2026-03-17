@@ -1,12 +1,11 @@
 package com.example.escuelaciclista_tfg
 
-import android.app.DatePickerDialog
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import java.util.*
 
 class DatosPersonalesActivity : AppCompatActivity() {
 
@@ -14,61 +13,53 @@ class DatosPersonalesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_datos_personales)
 
-        // 🔹 CAMPOS
+        // CAMPOS
         val etNombre = findViewById<EditText>(R.id.etNombreApellidos)
         val etFecha = findViewById<EditText>(R.id.etFechaNacimiento)
-        val etDni = findViewById<EditText>(R.id.etDNI)
+        val etDNI = findViewById<EditText>(R.id.etDNI)
         val etDireccion = findViewById<EditText>(R.id.etDireccion)
         val etTelefono = findViewById<EditText>(R.id.etTelefono)
 
         val btnGuardar = findViewById<Button>(R.id.btnGuardar)
         val btnBorrar = findViewById<Button>(R.id.btnBorrar)
 
-        // OBTENER LOS TEXTVIEW
-        val tvNombre = (etNombre.parent as LinearLayout).getChildAt(0) as TextView
-        val tvFecha = (etFecha.parent as LinearLayout).getChildAt(0) as TextView
-        val tvDni = (etDni.parent as LinearLayout).getChildAt(0) as TextView
-        val tvDireccion = (etDireccion.parent as LinearLayout).getChildAt(0) as TextView
+        // AUTO LETRA DNI
+        etDNI.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                val texto = s.toString()
 
-        // SELECTOR DE FECHA
-        etFecha.setOnClickListener {
-            val calendario = Calendar.getInstance()
+                if (texto.length == 8 && texto.all { it.isDigit() }) {
+                    val letra = calcularLetraDNI(texto)
+                    etDNI.setText(texto + letra)
+                    etDNI.setSelection(etDNI.text.length)
+                }
+            }
 
-            val datePicker = DatePickerDialog(
-                this,
-                { _, year, month, day ->
-                    val fecha = "%02d/%02d/%04d".format(day, month + 1, year)
-                    etFecha.setText(fecha)
-                },
-                calendario.get(Calendar.YEAR),
-                calendario.get(Calendar.MONTH),
-                calendario.get(Calendar.DAY_OF_MONTH)
-            )
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
 
-            datePicker.show()
-        }
-
-        // BOTÓN BORRAR
+        // BORRAR
         btnBorrar.setOnClickListener {
             etNombre.text.clear()
             etFecha.text.clear()
-            etDni.text.clear()
+            etDNI.text.clear()
             etDireccion.text.clear()
             etTelefono.text.clear()
 
-            resetColores(tvNombre, tvFecha, tvDni, tvDireccion)
+            limpiarErrores(etNombre, etFecha, etDNI, etDireccion)
 
-            Toast.makeText(this, "Formulario borrado correctamente", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Formulario borrado", Toast.LENGTH_SHORT).show()
         }
 
-        // BOTÓN GUARDAR (AHORA ES SIGUIENTE)
+        // SIGUIENTE
         btnGuardar.setOnClickListener {
 
-            resetColores(tvNombre, tvFecha, tvDni, tvDireccion)
+            limpiarErrores(etNombre, etFecha, etDNI, etDireccion)
 
             val nombre = etNombre.text.toString()
             val fecha = etFecha.text.toString()
-            val dni = etDni.text.toString()
+            val dni = etDNI.text.toString()
             val direccion = etDireccion.text.toString()
             val telefono = etTelefono.text.toString()
 
@@ -76,32 +67,31 @@ class DatosPersonalesActivity : AppCompatActivity() {
 
             var valido = true
 
-            if (nombre.isEmpty()) {
-                tvNombre.setTextColor(Color.RED)
+            // VALIDACIONES
+            if (nombre.isBlank()) {
+                etNombre.error = "Campo obligatorio"
                 valido = false
             }
 
-            if (fecha.isEmpty()) {
-                tvFecha.setTextColor(Color.RED)
+            if (fecha.isBlank()) {
+                etFecha.error = "Campo obligatorio"
                 valido = false
             }
 
-            if (dni.isEmpty() || !dniRegex.matches(dni)) {
-                tvDni.setTextColor(Color.RED)
-                Toast.makeText(this, "DNI inválido (8 números + letra)", Toast.LENGTH_SHORT).show()
+            if (!dniRegex.matches(dni)) {
+                etDNI.error = "DNI inválido"
                 valido = false
             }
 
-            if (direccion.isEmpty()) {
-                tvDireccion.setTextColor(Color.RED)
+            if (direccion.isBlank()) {
+                etDireccion.error = "Campo obligatorio"
                 valido = false
             }
 
             if (!valido) return@setOnClickListener
 
-            // PASAR DATOS A SIGUIENTE PANTALLA
+            // PASAR A SIGUIENTE
             val intent = Intent(this, DatosTutorActivity::class.java)
-
             intent.putExtra("nombre", nombre)
             intent.putExtra("fecha", fecha)
             intent.putExtra("dni", dni)
@@ -112,7 +102,14 @@ class DatosPersonalesActivity : AppCompatActivity() {
         }
     }
 
-    private fun resetColores(vararg textViews: TextView) {
-        textViews.forEach { it.setTextColor(Color.WHITE) }
+    private fun limpiarErrores(vararg editTexts: EditText) {
+        editTexts.forEach { it.error = null }
+    }
+
+    // LETRA DNI
+    private fun calcularLetraDNI(dni: String): String {
+        val letras = "TRWAGMYFPDXBNJZSQVHLCKE"
+        val numero = dni.toInt()
+        return letras[numero % 23].toString()
     }
 }

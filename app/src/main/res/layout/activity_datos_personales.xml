@@ -114,8 +114,8 @@
                     android:layout_weight="1"
                     android:hint="8 dígitos + letra"
                     android:textColorHint="#808080"
-                    android:maxLength="8"
-                    android:inputType="number" />
+                    android:maxLength="9"
+                    android:inputType="number"/>
             </LinearLayout>
 
             <!--Dirección-->

@@ -22,7 +22,7 @@ class ListaActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main2)
+        setContentView(R.layout.activity_lista)
 
         recyclerView = findViewById(R.id.recyclerAlumnos)
         searchView = findViewById(R.id.searchView)
