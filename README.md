@@ -62,12 +62,15 @@ IES Las Salinas
 
 Al iniciar la aplicación, deberás acceder con un usuario válido introduciendo correo electrónico (Gmail) y contraseña.
 
-Puedes utilizar el siguiente usuario de prueba:
+Puedes utilizar las siguientes credenciales:
 
-- Correo: director1@gmail.com
+- Correo 1: director1@gmail.com 
+- Contraseña 1: director1
+##
+- Correo 2: director2@gmail.com 
+- Contraseña 2: director2
 
-- Contraseña: director1
-
+  
 Una vez introducidos los datos, pulsa el botón Iniciar sesión.
 Si las credenciales son correctas, accederás al menú principal de la aplicación.
 
@@ -79,7 +82,7 @@ En el menú principal encontrarás dos botones, cada uno te llevará a una secci
 - Ver lista de alumnos: Muestra un listado con todos los alumnos que ya han sido registrados en el sistema.
 
 ## 3. Crear alumno
-En esta sección deberás rellenar todos los campos del formulario, ya que todos los datos son obligatorios.
+En esta sección deberás rellenar todos los campos del formulario, o solo los obligatorios.
 
 Una vez completados los datos tendrás dos opciones:
 
@@ -89,7 +92,7 @@ Una vez completados los datos tendrás dos opciones:
 
 ## 4. Lista de alumnos
 En esta sección se muestran todos los alumnos registrados en la aplicación.
-Además, dispones de un buscador que permite filtrar alumnos por nombre, facilitando encontrar rápidamente al alumno deseado.
+Además, dispones de un buscador que permite filtrar alumnos por el DNI del alumno, facilitando encontrar rápidamente al alumno deseado.
 
 Cada alumno se muestra en una tarjeta que contiene los siguientes datos principales:
 
@@ -97,7 +100,7 @@ Cada alumno se muestra en una tarjeta que contiene los siguientes datos principa
 
 -- DNI del alumno
 
--- Tutor (DNI del tutor)
+-- Numero de telefono del Tutor
 
 -- Modalidad (modalidad de ciclismo preferida)
 
