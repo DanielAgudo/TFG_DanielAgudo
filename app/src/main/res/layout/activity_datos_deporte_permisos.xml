@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".DatosDeportePermisosActivity">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!--Imagen superior-->
+            <ImageView
+                android:id="@+id/imgLogo"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/logo"
+                android:contentDescription="Logo Escuela" />
+
+
+            <!--INFORMACIÓN SOBRE EL DEPORTE-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="INFORMACIÓN SOBRE EL DEPORTE"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginBottom="10dp" />
+
+            <Spinner
+                android:id="@+id/spTipoBicicleta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:prompt="@string/prompt_tipo_bicicleta" />
+
+            <Spinner
+                android:id="@+id/spTalla"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:prompt="@string/prompt_talla" />
+
+            <Spinner
+                android:id="@+id/spModalidad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:prompt="@string/prompt_modalidad" />
+
+
+            <!--ESPACIO-->
+            <View android:layout_width="match_parent" android:layout_height="24dp" />
+
+            <!--PERMISOS-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PERMISOS"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginBottom="10dp" />
+
+            <CheckBox
+                android:id="@+id/cbProteccionDatos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Conozco la ley de protección de datos"
+                android:textColor="#FFFFFF"/>
+
+            <CheckBox
+                android:id="@+id/cbFotosRedes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Autorizo salir en fotos y redes sociales"
+                android:textColor="#FFFFFF"/>
+
+            <CheckBox
+                android:id="@+id/cbAsistenciaMedica"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Autorizo asistencia médica en caso de emergencia"
+                android:textColor="#FFFFFF"/>
+
+            <CheckBox
+                android:id="@+id/cbNormasEscuela"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Conozco las normas de la escuela"
+                android:textColor="#FFFFFF"/>
+
+            <!-- ESPACIO -->
+            <View android:layout_width="match_parent" android:layout_height="24dp" />
+
+            <!--Botones-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <Button
+                    android:id="@+id/btnBorrar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="BORRAR"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#D32F2F"
+                    android:layout_margin="8dp" />
+
+                <Button
+                    android:id="@+id/btnGuardar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="GUARDAR"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#071C47"
+                    android:layout_margin="8dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,12 +15,12 @@ class MenuActivity : AppCompatActivity() {
         val btnListaAlumnos = findViewById<Button>(R.id.btnListaAlumnos)
 
         btnNuevoAlumno.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, DatosPersonalesActivity::class.java)
             startActivity(intent)
         }
 
         btnListaAlumnos.setOnClickListener {
-            val intent = Intent(this, MainActivity2::class.java)
+            val intent = Intent(this, ListaActivity::class.java)
             startActivity(intent)
         }
     }
