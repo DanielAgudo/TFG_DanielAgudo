@@ -90,9 +90,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="dd/mm/aaaa"
+                    android:hint="Fecha"
                     android:textColorHint="#808080"
-                    android:inputType="date" />
+                    android:focusable="false"
+                    android:clickable="true" />
             </LinearLayout>
 
             <!--DNI-->
@@ -203,3 +204,5 @@
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+

@@ -1,11 +1,13 @@
 package com.example.escuelaciclista_tfg
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import java.util.Calendar
 
 class DatosPersonalesActivity : AppCompatActivity() {
 
@@ -22,6 +24,40 @@ class DatosPersonalesActivity : AppCompatActivity() {
 
         val btnGuardar = findViewById<Button>(R.id.btnGuardar)
         val btnBorrar = findViewById<Button>(R.id.btnBorrar)
+
+        // CALENDARIO
+        etFecha.setOnClickListener {
+
+            val calendario = Calendar.getInstance()
+
+            val year = calendario.get(Calendar.YEAR)
+            val month = calendario.get(Calendar.MONTH)
+            val day = calendario.get(Calendar.DAY_OF_MONTH)
+
+            val datePicker = DatePickerDialog(
+                this,
+                { _, selectedYear, selectedMonth, selectedDay ->
+
+                    val fecha = String.format(
+                        "%02d/%02d/%04d",
+                        selectedDay,
+                        selectedMonth + 1,
+                        selectedYear
+                    )
+
+                    etFecha.setText(fecha)
+
+                },
+                year,
+                month,
+                day
+            )
+
+            // ❗ NO permitir fechas futuras
+            datePicker.datePicker.maxDate = System.currentTimeMillis()
+
+            datePicker.show()
+        }
 
         // AUTO LETRA DNI
         etDNI.addTextChangedListener(object : TextWatcher {
@@ -67,7 +103,6 @@ class DatosPersonalesActivity : AppCompatActivity() {
 
             var valido = true
 
-            // VALIDACIONES
             if (nombre.isBlank()) {
                 etNombre.error = "Campo obligatorio"
                 valido = false
@@ -90,7 +125,6 @@ class DatosPersonalesActivity : AppCompatActivity() {
 
             if (!valido) return@setOnClickListener
 
-            // PASAR A SIGUIENTE
             val intent = Intent(this, DatosTutorActivity::class.java)
             intent.putExtra("nombre", nombre)
             intent.putExtra("fecha", fecha)
@@ -106,7 +140,6 @@ class DatosPersonalesActivity : AppCompatActivity() {
         editTexts.forEach { it.error = null }
     }
 
-    // LETRA DNI
     private fun calcularLetraDNI(dni: String): String {
         val letras = "TRWAGMYFPDXBNJZSQVHLCKE"
         val numero = dni.toInt()
