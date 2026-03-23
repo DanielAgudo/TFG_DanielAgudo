@@ -58,6 +58,10 @@ class ListaActivity : AppCompatActivity() {
 
                 for (document in result) {
                     val alumno = document.toObject(Alumno::class.java)
+
+                    //SIN ESTO NO FUNCIONA BORRAR
+                    alumno.id = document.id
+
                     listaAlumnos.add(alumno)
                 }
 

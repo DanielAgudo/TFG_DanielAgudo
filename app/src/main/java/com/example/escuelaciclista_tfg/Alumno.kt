@@ -1,6 +1,7 @@
 package com.example.escuelaciclista_tfg
 
 data class Alumno(
+    var id: String = "",
     var nombre_apellidos: String = "",
     var fecha_nacimiento: String = "",
     var dni: String = "",
