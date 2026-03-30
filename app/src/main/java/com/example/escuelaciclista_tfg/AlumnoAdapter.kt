@@ -1,6 +1,7 @@
 package com.example.escuelaciclista_tfg
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,7 @@ class AlumnoAdapter(private var lista: MutableList<Alumno>) :
         val modalidad: TextView = view.findViewById(R.id.tvModalidad)
 
         val btnEliminar: Button = view.findViewById(R.id.btnEliminar)
+        val btnEditar: Button = view.findViewById(R.id.btnEditar) // 🔥 NUEVO
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -47,13 +49,11 @@ class AlumnoAdapter(private var lista: MutableList<Alumno>) :
                 .setMessage("¿Seguro que quieres borrar este alumno?")
                 .setPositiveButton("Sí") { _, _ ->
 
-                    //BORRAR DE FIREBASE
                     db.collection("alumnos")
                         .document(alumno.id)
                         .delete()
                         .addOnSuccessListener {
 
-                            //BORRAR DE LA LISTA VISUAL
                             lista.removeAt(position)
                             notifyItemRemoved(position)
                             notifyItemRangeChanged(position, lista.size)
@@ -61,6 +61,22 @@ class AlumnoAdapter(private var lista: MutableList<Alumno>) :
                 }
                 .setNegativeButton("No", null)
                 .show()
+        }
+
+        //BOTÓN EDITAR
+        holder.btnEditar.setOnClickListener {
+
+            val context = holder.itemView.context
+            val intent = Intent(context, EditarAlumnoActivity::class.java)
+
+            //PASAR DATOS
+            intent.putExtra("id", alumno.id)
+            intent.putExtra("nombre", alumno.nombre_apellidos)
+            intent.putExtra("dni", alumno.dni)
+            intent.putExtra("telefonoTutor", alumno.telefono_tutor)
+            intent.putExtra("modalidad", alumno.modalidad)
+
+            context.startActivity(intent)
         }
     }
 

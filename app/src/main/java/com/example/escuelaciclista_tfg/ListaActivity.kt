@@ -34,6 +34,7 @@ class ListaActivity : AppCompatActivity() {
 
         cargarAlumnos()
 
+        //BUSCADOR
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?) = false
 
@@ -43,12 +44,20 @@ class ListaActivity : AppCompatActivity() {
             }
         })
 
+        //BOTÓN MENÚ
         btnMenu.setOnClickListener {
             val intent = Intent(this, MenuActivity::class.java)
             startActivity(intent)
         }
     }
 
+    //RECARGAR AUTOMÁTICAMENTE AL VOLVER DE EDITAR
+    override fun onResume() {
+        super.onResume()
+        cargarAlumnos()
+    }
+
+    //CARGAR DESDE FIREBASE
     private fun cargarAlumnos() {
         db.collection("alumnos")
             .get()
@@ -59,7 +68,7 @@ class ListaActivity : AppCompatActivity() {
                 for (document in result) {
                     val alumno = document.toObject(Alumno::class.java)
 
-                    //SIN ESTO NO FUNCIONA BORRAR
+                    //NECESARIO PARA BORRAR Y EDITAR
                     alumno.id = document.id
 
                     listaAlumnos.add(alumno)
@@ -72,6 +81,7 @@ class ListaActivity : AppCompatActivity() {
             }
     }
 
+    //FILTRAR POR DNI
     private fun filtrar(texto: String) {
         val listaFiltrada = listaAlumnos.filter {
             it.dni.lowercase().contains(texto.lowercase())
