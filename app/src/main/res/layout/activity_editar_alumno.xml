@@ -45,8 +45,10 @@
                 android:id="@+id/etDni"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="DNI"
-                android:layout_marginTop="10dp"/>
+                android:hint="8 dígitos + letra"
+                android:layout_marginTop="10dp"
+                android:inputType="number"
+                android:maxLength="9"/>
 
             <!--TELÉFONO-->
             <EditText
