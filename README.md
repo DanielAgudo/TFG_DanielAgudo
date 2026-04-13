@@ -104,3 +104,5 @@ Cada alumno se muestra en una tarjeta que contiene los siguientes datos principa
 
 -- Modalidad (modalidad de ciclismo preferida)
 
+En esta ventana, cada tarjeta de alumnos, tendra un boton de borrar , que borrara la tarjeta y sus datos en firebase. Tambien habra un boton editar que se podra cambiar los datos de las tarjetas y actualizarse.
+
