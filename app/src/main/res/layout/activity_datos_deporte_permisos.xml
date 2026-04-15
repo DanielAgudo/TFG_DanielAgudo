@@ -6,7 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="#BDB8B8"
     tools:context=".DatosDeportePermisosActivity">
 
     <ScrollView
@@ -39,7 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="INFORMACIÓN SOBRE EL DEPORTE"
-                android:textColor="#FFFFFF"
+                android:textColor="#000000"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:layout_marginBottom="10dp" />
@@ -73,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="PERMISOS"
-                android:textColor="#FFFFFF"
+                android:textColor="#000000"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:layout_marginBottom="10dp" />
@@ -83,28 +83,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Conozco la ley de protección de datos"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#000000"/>
 
             <CheckBox
                 android:id="@+id/cbFotosRedes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Autorizo salir en fotos y redes sociales"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#000000"/>
 
             <CheckBox
                 android:id="@+id/cbAsistenciaMedica"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Autorizo asistencia médica en caso de emergencia"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#000000"/>
 
             <CheckBox
                 android:id="@+id/cbNormasEscuela"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Conozco las normas de la escuela"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#000000"/>
 
             <!-- ESPACIO -->
             <View android:layout_width="match_parent" android:layout_height="24dp" />

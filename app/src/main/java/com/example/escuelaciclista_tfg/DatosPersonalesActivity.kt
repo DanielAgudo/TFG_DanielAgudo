@@ -7,15 +7,18 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.firestore.FirebaseFirestore
 import java.util.Calendar
 
 class DatosPersonalesActivity : AppCompatActivity() {
+
+    private val db = FirebaseFirestore.getInstance() // 🔥 FIREBASE
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_datos_personales)
 
-        // CAMPOS
+        //CAMPOS
         val etNombre = findViewById<EditText>(R.id.etNombreApellidos)
         val etFecha = findViewById<EditText>(R.id.etFechaNacimiento)
         val etDNI = findViewById<EditText>(R.id.etDNI)
@@ -25,7 +28,7 @@ class DatosPersonalesActivity : AppCompatActivity() {
         val btnGuardar = findViewById<Button>(R.id.btnGuardar)
         val btnBorrar = findViewById<Button>(R.id.btnBorrar)
 
-        // CALENDARIO
+        //CALENDARIO
         etFecha.setOnClickListener {
 
             val calendario = Calendar.getInstance()
@@ -59,7 +62,7 @@ class DatosPersonalesActivity : AppCompatActivity() {
             datePicker.show()
         }
 
-        // AUTO LETRA DNI
+        //AUTO LETRA DNI
         etDNI.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val texto = s.toString()
@@ -75,7 +78,7 @@ class DatosPersonalesActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
 
-        // BORRAR
+        //BORRAR
         btnBorrar.setOnClickListener {
             etNombre.text.clear()
             etFecha.text.clear()
@@ -88,7 +91,7 @@ class DatosPersonalesActivity : AppCompatActivity() {
             Toast.makeText(this, "Formulario borrado", Toast.LENGTH_SHORT).show()
         }
 
-        // SIGUIENTE
+        //SIGUIENTE
         btnGuardar.setOnClickListener {
 
             limpiarErrores(etNombre, etFecha, etDNI, etDireccion)
@@ -103,6 +106,7 @@ class DatosPersonalesActivity : AppCompatActivity() {
 
             var valido = true
 
+            // VALIDACIONES
             if (nombre.isBlank()) {
                 etNombre.error = "Campo obligatorio"
                 valido = false
@@ -125,14 +129,33 @@ class DatosPersonalesActivity : AppCompatActivity() {
 
             if (!valido) return@setOnClickListener
 
-            val intent = Intent(this, DatosTutorActivity::class.java)
-            intent.putExtra("nombre", nombre)
-            intent.putExtra("fecha", fecha)
-            intent.putExtra("dni", dni)
-            intent.putExtra("direccion", direccion)
-            intent.putExtra("telefono", telefono)
+            //COMPROBAR DNI DUPLICADO EN FIREBASE
+            db.collection("alumnos")
+                .whereEqualTo("dni", dni)
+                .get()
+                .addOnSuccessListener { documentos ->
 
-            startActivity(intent)
+                    if (!documentos.isEmpty) {
+                        //YA EXISTE
+                        etDNI.error = "Este DNI ya está registrado"
+                        Toast.makeText(this, "Ya existe un alumno con ese DNI", Toast.LENGTH_LONG).show()
+
+                    } else {
+                        //CONTINUAR
+                        val intent = Intent(this, DatosTutorActivity::class.java)
+
+                        intent.putExtra("nombre", nombre)
+                        intent.putExtra("fecha", fecha)
+                        intent.putExtra("dni", dni)
+                        intent.putExtra("direccion", direccion)
+                        intent.putExtra("telefono", telefono)
+
+                        startActivity(intent)
+                    }
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, "Error al comprobar DNI", Toast.LENGTH_SHORT).show()
+                }
         }
     }
 
@@ -140,6 +163,7 @@ class DatosPersonalesActivity : AppCompatActivity() {
         editTexts.forEach { it.error = null }
     }
 
+    // LETRA DNI
     private fun calcularLetraDNI(dni: String): String {
         val letras = "TRWAGMYFPDXBNJZSQVHLCKE"
         val numero = dni.toInt()
