@@ -16,7 +16,7 @@ class DatosTutorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_datos_tutor)
 
-        // DATOS RECIBIDOS
+        //DATOS RECIBIDOS
         val dniAlumno = intent.getStringExtra("dni")
 
         val nombre = intent.getStringExtra("nombre")
@@ -24,7 +24,7 @@ class DatosTutorActivity : AppCompatActivity() {
         val direccion = intent.getStringExtra("direccion")
         val telefono = intent.getStringExtra("telefono")
 
-        // CAMPOS
+        //CAMPOS
         val etNombreTutor = findViewById<EditText>(R.id.etNombreTutor)
         val etDniTutor = findViewById<EditText>(R.id.etDNITutor)
         val etTelefonoTutor = findViewById<EditText>(R.id.etTelefonoTutor)
@@ -33,7 +33,7 @@ class DatosTutorActivity : AppCompatActivity() {
         val btnGuardar = findViewById<Button>(R.id.btnGuardar)
         val btnBorrar = findViewById<Button>(R.id.btnBorrar)
 
-        // AUTO LETRA DNI
+        //AUTO LETRA DNI
         etDniTutor.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val texto = s.toString()
@@ -49,7 +49,7 @@ class DatosTutorActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
 
-        // BORRAR
+        //BORRAR
         btnBorrar.setOnClickListener {
             etNombreTutor.text.clear()
             etDniTutor.text.clear()
@@ -61,7 +61,7 @@ class DatosTutorActivity : AppCompatActivity() {
             Toast.makeText(this, "Formulario borrado", Toast.LENGTH_SHORT).show()
         }
 
-        // GUARDAR
+        //GUARDAR
         btnGuardar.setOnClickListener {
 
             limpiarErrores(etNombreTutor, etDniTutor, etTelefonoTutor, etEmailTutor)

@@ -56,7 +56,6 @@ class DatosPersonalesActivity : AppCompatActivity() {
                 day
             )
 
-            // ❗ NO permitir fechas futuras
             datePicker.datePicker.maxDate = System.currentTimeMillis()
 
             datePicker.show()
@@ -141,7 +140,6 @@ class DatosPersonalesActivity : AppCompatActivity() {
                         Toast.makeText(this, "Ya existe un alumno con ese DNI", Toast.LENGTH_LONG).show()
 
                     } else {
-                        //CONTINUAR
                         val intent = Intent(this, DatosTutorActivity::class.java)
 
                         intent.putExtra("nombre", nombre)

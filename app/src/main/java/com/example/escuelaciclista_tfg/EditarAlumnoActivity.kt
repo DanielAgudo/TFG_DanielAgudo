@@ -94,7 +94,7 @@ class EditarAlumnoActivity : AppCompatActivity() {
             val letra = calcularLetraDni(numeros)
             val nuevoDni = numeros + letra
 
-            // 🔥 COMPROBAR DNI DUPLICADO
+            // COMPROBAR DNI DUPLICADO
             db.collection("alumnos")
                 .whereEqualTo("dni", nuevoDni)
                 .get()
@@ -114,7 +114,7 @@ class EditarAlumnoActivity : AppCompatActivity() {
                         Toast.makeText(this, "DNI duplicado", Toast.LENGTH_LONG).show()
                     } else {
 
-                        // ✅ ACTUALIZAR
+                        // ACTUALIZAR
                         val alumnoActualizado = hashMapOf(
                             "nombre_apellidos" to nuevoNombre,
                             "dni" to nuevoDni,

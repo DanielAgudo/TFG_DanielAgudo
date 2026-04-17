@@ -42,7 +42,7 @@ class DatosMedicosActivity : AppCompatActivity() {
             Toast.makeText(this, "Datos médicos borrados", Toast.LENGTH_SHORT).show()
         }
 
-        // BOTÓN GUARDAR (SIGUIENTE PANTALLA)
+        // BOTÓN GUARDAR
         btnGuardar.setOnClickListener {
 
             val alergias = etAlergias.text.toString()
@@ -50,23 +50,22 @@ class DatosMedicosActivity : AppCompatActivity() {
             val medicamentos = etMedicamentos.text.toString()
             val telefonoEmergencia = etTelefonoEmergencia.text.toString()
 
-            // PASAR TODO A LA SIGUIENTE PANTALLA FINAL
             val intent = Intent(this, DatosDeportePermisosActivity::class.java)
 
-            // ALUMNO
+            //ALUMNO
             intent.putExtra("nombre", nombre)
             intent.putExtra("fecha", fecha)
             intent.putExtra("dni", dni)
             intent.putExtra("direccion", direccion)
             intent.putExtra("telefono", telefono)
 
-            // TUTOR
+            //TUTOR
             intent.putExtra("nombreTutor", nombreTutor)
             intent.putExtra("dniTutor", dniTutor)
             intent.putExtra("telefonoTutor", telefonoTutor)
             intent.putExtra("emailTutor", emailTutor)
 
-            // MÉDICOS
+            //MÉDICOS
             intent.putExtra("alergias", alergias)
             intent.putExtra("condicion", condicion)
             intent.putExtra("medicamentos", medicamentos)
