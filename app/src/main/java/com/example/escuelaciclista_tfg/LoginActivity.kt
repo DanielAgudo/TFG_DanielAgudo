@@ -7,15 +7,17 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
 
@@ -25,6 +27,7 @@ class LoginActivity : AppCompatActivity() {
         val etPassword = findViewById<EditText>(R.id.etPassword)
         val btnAcceder = findViewById<Button>(R.id.btnAcceder)
 
+        // BOTÓN ACCEDER
         btnAcceder.setOnClickListener {
 
             val email = etUsuario.text.toString().trim()
@@ -40,11 +43,50 @@ class LoginActivity : AppCompatActivity() {
 
                     if (task.isSuccessful) {
 
-                        Toast.makeText(this, "Login correcto", Toast.LENGTH_SHORT).show()
+                        val usuario = auth.currentUser
+                        val uid = usuario?.uid ?: ""
 
-                        val intent = Intent(this, MenuActivity::class.java)
-                        startActivity(intent)
-                        finish()
+                        // BUSCAR DIRECTOR
+                        db.collection("directores")
+                            .document(uid)
+                            .get()
+                            .addOnSuccessListener { document ->
+
+                                if (document.exists()) {
+
+                                    val nombreDirector =
+                                        document.getString("nombre") ?: "Director"
+
+                                    Toast.makeText(
+                                        this,
+                                        "Bienvenido $nombreDirector",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+
+                                } else {
+
+                                    Toast.makeText(
+                                        this,
+                                        "Login correcto",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+
+                                val intent =
+                                    Intent(this, MenuActivity::class.java)
+
+                                startActivity(intent)
+                                finish()
+                            }
+
+                            .addOnFailureListener {
+
+                                val intent =
+                                    Intent(this, MenuActivity::class.java)
+
+                                startActivity(intent)
+                                finish()
+                            }
 
                     } else {
 
@@ -58,4 +100,3 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 }
-
