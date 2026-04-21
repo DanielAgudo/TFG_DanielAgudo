@@ -17,7 +17,7 @@ class EditarAlumnoActivity : AppCompatActivity() {
 
         val id = intent.getStringExtra("id")
         val nombre = intent.getStringExtra("nombre")
-        val dniOriginal = intent.getStringExtra("dni") // 🔥 IMPORTANTE
+        val dniOriginal = intent.getStringExtra("dni")
         val telefono = intent.getStringExtra("telefonoTutor")
         val modalidad = intent.getStringExtra("modalidad")
 

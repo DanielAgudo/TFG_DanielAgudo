@@ -22,7 +22,7 @@ class AlumnoAdapter(private var lista: MutableList<Alumno>) :
         val modalidad: TextView = view.findViewById(R.id.tvModalidad)
 
         val btnEliminar: Button = view.findViewById(R.id.btnEliminar)
-        val btnEditar: Button = view.findViewById(R.id.btnEditar) // 🔥 NUEVO
+        val btnEditar: Button = view.findViewById(R.id.btnEditar)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
