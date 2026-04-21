@@ -17,5 +17,8 @@ data class Alumno(
     var telefono_emergencias: String = "",
     var tipo_bicicleta: String = "",
     var talla: String = "",
-    var modalidad: String = ""
+    var modalidad: String = "",
+
+    var usuarioId: String = "",
+    var usuarioEmail: String = ""
 )

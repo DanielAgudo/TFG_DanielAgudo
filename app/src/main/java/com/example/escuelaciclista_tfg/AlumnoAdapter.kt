@@ -16,32 +16,38 @@ class AlumnoAdapter(private var lista: MutableList<Alumno>) :
     private val db = FirebaseFirestore.getInstance()
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
         val nombre: TextView = view.findViewById(R.id.tvNombre)
         val dni: TextView = view.findViewById(R.id.tvDni)
         val telefonoTutor: TextView = view.findViewById(R.id.tvTelefonoTutor)
         val modalidad: TextView = view.findViewById(R.id.tvModalidad)
+        val director: TextView = view.findViewById(R.id.tvDirector)
 
         val btnEliminar: Button = view.findViewById(R.id.btnEliminar)
         val btnEditar: Button = view.findViewById(R.id.btnEditar)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_alumno, parent, false)
+
         return ViewHolder(view)
     }
 
     override fun getItemCount(): Int = lista.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
         val alumno = lista[position]
 
         holder.nombre.text = alumno.nombre_apellidos
         holder.dni.text = "DNI: ${alumno.dni}"
-        holder.telefonoTutor.text = "Teléfono Tutor: ${alumno.telefono_tutor}"
+        holder.telefonoTutor.text = "Tel: ${alumno.telefono_tutor}"
         holder.modalidad.text = "Modalidad: ${alumno.modalidad}"
+        holder.director.text = "Director: ${alumno.usuarioEmail}"
 
-        //BOTÓN BORRAR
+        // BOTÓN BORRAR
         holder.btnEliminar.setOnClickListener {
 
             AlertDialog.Builder(holder.itemView.context)
@@ -63,24 +69,23 @@ class AlumnoAdapter(private var lista: MutableList<Alumno>) :
                 .show()
         }
 
-        //BOTÓN EDITAR
+        // BOTÓN EDITAR
         holder.btnEditar.setOnClickListener {
 
-            val context = holder.itemView.context
-            val intent = Intent(context, EditarAlumnoActivity::class.java)
+            val intent = Intent(holder.itemView.context, EditarAlumnoActivity::class.java)
 
-            //PASAR DATOS
             intent.putExtra("id", alumno.id)
             intent.putExtra("nombre", alumno.nombre_apellidos)
             intent.putExtra("dni", alumno.dni)
             intent.putExtra("telefonoTutor", alumno.telefono_tutor)
             intent.putExtra("modalidad", alumno.modalidad)
 
-            context.startActivity(intent)
+            holder.itemView.context.startActivity(intent)
         }
     }
 
     fun actualizarLista(nuevaLista: List<Alumno>) {
+
         lista = nuevaLista.toMutableList()
         notifyDataSetChanged()
     }

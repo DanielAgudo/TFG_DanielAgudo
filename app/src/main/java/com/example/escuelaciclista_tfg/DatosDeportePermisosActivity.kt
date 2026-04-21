@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.Timestamp
 
 class DatosDeportePermisosActivity : AppCompatActivity() {
 
@@ -76,6 +78,11 @@ class DatosDeportePermisosActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            //USUARIO LOGEADO
+            val usuario = FirebaseAuth.getInstance().currentUser
+            val uid = usuario?.uid ?: ""
+            val email = usuario?.email ?: ""
+
             val alumno = hashMapOf(
                 "nombre_apellidos" to nombre,
                 "fecha_nacimiento" to fecha,
@@ -95,20 +102,26 @@ class DatosDeportePermisosActivity : AppCompatActivity() {
 
                 "tipo_bicicleta" to spTipo.selectedItem.toString(),
                 "talla" to spTalla.selectedItem.toString(),
-                "modalidad" to spModalidad.selectedItem.toString()
+                "modalidad" to spModalidad.selectedItem.toString(),
+
+                //NUEVOS CAMPOS
+                "usuarioId" to uid,
+                "usuarioEmail" to email,
+                "fechaCreacion" to Timestamp.now()
             )
 
-            // COMPROBAR DNI DUPLICADO (SEGURIDAD FINAL)
+            // COMPROBAR DNI DUPLICADO
             db.collection("alumnos")
                 .whereEqualTo("dni", dni)
                 .get()
                 .addOnSuccessListener { documents ->
 
                     if (!documents.isEmpty) {
+
                         Toast.makeText(this, "Ya existe un alumno con ese DNI", Toast.LENGTH_LONG).show()
+
                     } else {
 
-                        // GUARDAR EN FIREBASE
                         db.collection("alumnos")
                             .add(alumno)
                             .addOnSuccessListener {
