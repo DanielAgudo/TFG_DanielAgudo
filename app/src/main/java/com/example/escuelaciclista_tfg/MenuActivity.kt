@@ -21,6 +21,7 @@ class MenuActivity : AppCompatActivity() {
         val btnNuevoAlumno = findViewById<Button>(R.id.btnNuevoAlumno)
         val btnListaAlumnos = findViewById<Button>(R.id.btnListaAlumnos)
         val btnMisAlumnos = findViewById<Button>(R.id.btnMisAlumnos)
+        val btnDirectores = findViewById<Button>(R.id.btnDirectores) // NUEVO
 
         // CARGAR DIRECTOR
         val uid = FirebaseAuth.getInstance().currentUser?.uid
@@ -71,6 +72,13 @@ class MenuActivity : AppCompatActivity() {
         btnMisAlumnos.setOnClickListener {
 
             val intent = Intent(this, miLista::class.java)
+            startActivity(intent)
+        }
+
+        // BOTÓN DIRECTORES (NUEVO)
+        btnDirectores.setOnClickListener {
+
+            val intent = Intent(this, ListaDirectoresActivity::class.java)
             startActivity(intent)
         }
     }

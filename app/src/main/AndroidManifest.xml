@@ -12,39 +12,57 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EscuelaCiclista_TFG"
         tools:targetApi="31">
+
+        <activity
+            android:name=".ListaDirectoresActivity"
+            android:exported="false" />
+
+        <!-- 🔥 NUEVA ACTIVITY (IMPORTANTE) -->
+        <activity
+            android:name=".AlumnosDirectorActivity"
+            android:exported="false" />
+
         <activity
             android:name=".miLista"
             android:exported="false" />
+
         <activity
             android:name=".EditarAlumnoActivity"
             android:exported="false" />
+
         <activity
             android:name=".DatosDeportePermisosActivity"
             android:exported="false" />
+
         <activity
             android:name=".DatosMedicosActivity"
             android:exported="false" />
+
         <activity
             android:name=".DatosTutorActivity"
             android:exported="false" />
+
         <activity
             android:name=".DatosPersonalesActivity"
             android:exported="false" />
+
         <activity
             android:name=".MenuActivity"
             android:exported="false" />
+
         <activity
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ListaActivity"
             android:exported="false" />
+
     </application>
 
 </manifest>

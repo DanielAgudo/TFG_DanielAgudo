@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="6dp"
+    app:cardBackgroundColor="#264985"
+    tools:context=".ListaDirectoresActivity">
+
+    <TextView
+        android:id="@+id/tvNombreDirector"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Director 1"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:padding="16dp"
+        tools:text="Director Ejemplo"/>
+
+</androidx.cardview.widget.CardView>
